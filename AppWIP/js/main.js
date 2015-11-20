@@ -30,10 +30,10 @@ var GameState = {
   update: function() {
   },
  createOnscreenControls: function(){
-    this.toneOne = this.add.button(20, 300, 'toneOneButton');
-    this.toneTwo = this.add.button(50, 300, 'toneTwoButton');
-    this.toneThree = this.add.button(80, 300, 'toneThreeButton');
-    this.toneFour = this.add.button(110, 300, 'toneFourButton');
+    this.toneOne = this.add.button(10, 580, 'toneOneButton');
+    this.toneTwo = this.add.button(100, 580, 'toneTwoButton');
+    this.toneThree = this.add.button(190, 580, 'toneThreeButton');
+    this.toneFour = this.add.button(280, 580, 'toneFourButton');
     
   }
   
