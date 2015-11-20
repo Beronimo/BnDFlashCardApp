@@ -19,12 +19,19 @@ var GameState = {
     this.load.image('toneThreeButton', 'assets/images/btnTone3.png');   
     this.load.image('toneFourButton', 'assets/images/btnTone4.png');   
     
+    this.load.text('chineseCharacters', 'assets/data/character.json');
+    
   },
   //executed after everything is loaded
   create: function() {
     this.background = this.game.add.sprite(0, 0, 'background');
     
     this.createOnscreenControls();
+    
+    this.characterData = JSON.parse(this.game.cache.getText('chineseCharacters'));
+
+    console.log(this.characterData);
+    
   },
   //this is executed multiple times per second
   update: function() {

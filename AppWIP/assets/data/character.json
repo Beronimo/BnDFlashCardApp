@@ -1,5 +1,5 @@
 {
-	"characterData":{
+  "characterData":[
     {"character":"我","tone":"3", "pinyin":"Wǒ", "meaning":"Me, I"},
     {"character":"你","tone":"3", "pinyin":"xx", "meaning":"Me, I"},
     {"character":"男","tone":"2", "pinyin":"xx", "meaning":"Me, I"},
@@ -7,7 +7,6 @@
     {"character":"他","tone":"1", "pinyin":"xx", "meaning":"Me, I"},
     {"character":"爸","tone":"1", "pinyin":"xx", "meaning":"Me, I"},
     {"character":"媽","tone":"1", "pinyin":"xx", "meaning":"Me, I"}
-  }
-
+  ]
 
 }
