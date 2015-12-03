@@ -29,7 +29,7 @@ var GameState = {
     this.createOnscreenControls();
    // console.log(this.game.cache.getText('chineseCharacters'));
     
-    this.characterLibraryData = JSON.parse(this.game.cache.getText('chineseCharacters'));
+    this.characterLibraryData =     JSON.parse(this.game.cache.getText('chineseCharacters'));
     
     this.characterLibraryData.characterData.forEach(function(element){
       console.log('character = '+ element.character
@@ -66,6 +66,11 @@ var GameState = {
     this.toneThree = this.add.button(190, 580, 'toneThreeButton');
     this.toneFour = this.add.button(280, 580, 'toneFourButton');
     
+    this.toneOne.events.onInputDown.add(function(){
+      console.log("toneOne pressed")
+    }, this);
+   
+   
   }
   
 };
