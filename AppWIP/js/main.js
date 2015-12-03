@@ -31,6 +31,7 @@ var GameState = {
     this.characterData = JSON.parse(this.game.cache.getText('chineseCharacters'));
 
     console.log(this.characterData);
+	console.log('darren testing');
     
   },
   //this is executed multiple times per second
