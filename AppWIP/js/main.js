@@ -27,12 +27,15 @@ var GameState = {
     this.background = this.game.add.sprite(0, 0, 'background');
     
     this.createOnscreenControls();
+   // console.log(this.game.cache.getText('chineseCharacters'));
     
-    //this.characterData = JSON.parse(this.game.cache.getText('chineseCharacters'));
+    this.characterLibraryData = JSON.parse(this.game.cache.getText('chineseCharacters'));
+    console.log(this.characterLibraryData.characterData[0].character);
 
-    //console.log(this.characterData[0]);
-    var characterData = [
-    {"character":"我","tone":"3", "pinyin":"Wǒ", "meaning":"Me, I"},
+
+   // console.log(this.characterData[2]);
+/*    var characterData = [
+      {"character":"我","tone":"3", "pinyin":"Wǒ", "meaning":"Me, I"},
       {"character":"你","tone":"3", "pinyin":"xx", "meaning":"Me, I"},
       {"character":"男","tone":"2", "pinyin":"xx", "meaning":"Me, I"},
       {"character":"女","tone":"3", "pinyin":"xx", "meaning":"Me, I"},
@@ -40,9 +43,11 @@ var GameState = {
       {"character":"爸","tone":"1", "pinyin":"xx", "meaning":"Me, I"},
       {"character":"媽","tone":"1", "pinyin":"xx", "meaning":"Me, I"}
     ]
-      
-    console.log(characterData[2].character);
-	console.log('darren testing');
+      */
+   // console.log(characterData[2]);
+    
+
+
     
   },
   //this is executed multiple times per second
