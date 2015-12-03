@@ -30,7 +30,14 @@ var GameState = {
    // console.log(this.game.cache.getText('chineseCharacters'));
     
     this.characterLibraryData = JSON.parse(this.game.cache.getText('chineseCharacters'));
-    console.log(this.characterLibraryData.characterData[0].character);
+    
+    this.characterLibraryData.characterData.forEach(function(element){
+      console.log('character = '+ element.character
+                  +', tone = '+ element.tone
+                  +', pinyin = '+ element.pinyin
+                  +', meaning = '+ element.meaning);
+    }, this);
+    
 
 
    // console.log(this.characterData[2]);
