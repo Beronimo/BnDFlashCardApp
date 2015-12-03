@@ -69,9 +69,16 @@ var GameState = {
     this.toneOne.events.onInputDown.add(function(){
       console.log("toneOne pressed")
     }, this);
-   
-   
-  }
+    this.toneTwo.events.onInputDown.add(function(){
+      console.log("toneTwo pressed")
+    }, this);
+    this.toneThree.events.onInputDown.add(function(){
+      console.log("toneThree pressed")
+    }, this);
+    this.toneFour.events.onInputDown.add(function(){
+      console.log("toneFour pressed")
+    }, this);
+ },
   
 };
 
