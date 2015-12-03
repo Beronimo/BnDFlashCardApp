@@ -30,7 +30,7 @@ var GameState = {
     
     this.characterData = JSON.parse(this.game.cache.getText('chineseCharacters'));
 
-    console.log(this.characterData);
+    console.log(this.characterData[0]);
 	console.log('darren testing');
     
   },
