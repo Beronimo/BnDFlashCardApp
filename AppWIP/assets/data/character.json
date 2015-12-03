@@ -1,12 +1,12 @@
 {
   "characterData":[
     {"character":"我","tone":"3", "pinyin":"Wǒ", "meaning":"Me, I"},
-    {"character":"你","tone":"3", "pinyin":"xx", "meaning":"Me, I"},
-    {"character":"男","tone":"2", "pinyin":"xx", "meaning":"Me, I"},
-    {"character":"女","tone":"3", "pinyin":"xx", "meaning":"Me, I"},
-    {"character":"他","tone":"1", "pinyin":"xx", "meaning":"Me, I"},
-    {"character":"爸","tone":"1", "pinyin":"xx", "meaning":"Me, I"},
-    {"character":"媽","tone":"1", "pinyin":"xx", "meaning":"Me, I"}
+    {"character":"你","tone":"3", "pinyin":"Nǐ", "meaning":"You"},
+    {"character":"男","tone":"2", "pinyin":"Nán", "meaning":"Boy, Male"},
+    {"character":"女","tone":"3", "pinyin":"Nǚ", "meaning":"Girl, Female"},
+    {"character":"他","tone":"1", "pinyin":"Tā", "meaning":"He"},
+    {"character":"爸","tone":"1", "pinyin":"Bà", "meaning":"Father"},
+    {"character":"媽","tone":"1", "pinyin":"Mā", "meaning":"Mother"}
   ]
 
 }
