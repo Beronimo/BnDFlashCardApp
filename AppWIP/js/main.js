@@ -2,7 +2,7 @@
 var currentCharIndex = 0;
 var currentWord;
 var currentDisplayWord;
-var currentAnswerResult = "Correct";
+var currentAnswerResult;
 var charStyle = {font: "64px Arial", fill: "#fff"};
 var styleCorrect = {font: "44px Arial", fill: "green"};
 var styleIncorrect = {font: "44px Arial", fill: "red"};
@@ -97,9 +97,16 @@ var GameState = {
         if(currentWord.tone==toneNumber){
             //right answer
             this.displayCharResult(true);
-            //currentAnswerResult.destroy();
             currentDisplayWord.destroy();
-            currentCharIndex = currentCharIndex+1;
+            if (currentCharIndex+1 == this.characterLibraryData.characterData.length){
+                currentCharIndex = 0;
+                alert ("back to the start of the deck");
+            }
+            else{
+                currentCharIndex++;
+                
+            };
+            
             this.displayCurrentWord();
             
         }
@@ -114,7 +121,7 @@ var GameState = {
     displayCharResult: function(passFail){
 
         if (passFail){
-            this.currentAnswerResult = "Correct";
+            currentAnswerResult = "Correct";
             this.add.text(100,250, currentAnswerResult, styleCorrect);
 
         }else{
@@ -134,7 +141,7 @@ var GameState = {
                   +', meaning = '+ currentWord.meaning);      
    
         currentDisplayWord = this.add.text(100,150,currentWord.character,charStyle);
-
+        console.log("currentCharIndex is " + currentCharIndex +" of "+ this.characterLibraryData.characterData.length);
     },
     
   
