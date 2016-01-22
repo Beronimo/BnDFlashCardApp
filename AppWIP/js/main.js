@@ -1,4 +1,9 @@
 //this game will have only 1 state
+var currentCharIndex = 0;
+var currentWord;
+var currentDisplayWord;
+var charStyle = {font: "64px Arial", fill: "#fff"};
+
 var GameState = {
   
   init: function() {
@@ -24,6 +29,7 @@ var GameState = {
   },
   //executed after everything is loaded
   create: function() {
+       
     this.background = this.game.add.sprite(0, 0, 'background');
     
     this.createOnscreenControls();
@@ -37,22 +43,17 @@ var GameState = {
                   +', pinyin = '+ element.pinyin
                   +', meaning = '+ element.meaning);
     }, this);
+      currentWord = this.characterLibraryData.characterData[currentCharIndex];
+      console.log("the current word is = " + currentWord.character
+                   +', tone = '+ currentWord.tone
+                  +', pinyin = '+ currentWord.pinyin
+                  +', meaning = '+ currentWord.meaning);
+     
+      
+      this.displayCurrentWord();
     
 
 
-   // console.log(this.characterData[2]);
-/*    var characterData = [
-      {"character":"我","tone":"3", "pinyin":"Wǒ", "meaning":"Me, I"},
-      {"character":"你","tone":"3", "pinyin":"xx", "meaning":"Me, I"},
-      {"character":"男","tone":"2", "pinyin":"xx", "meaning":"Me, I"},
-      {"character":"女","tone":"3", "pinyin":"xx", "meaning":"Me, I"},
-      {"character":"他","tone":"1", "pinyin":"xx", "meaning":"Me, I"},
-      {"character":"爸","tone":"1", "pinyin":"xx", "meaning":"Me, I"},
-      {"character":"媽","tone":"1", "pinyin":"xx", "meaning":"Me, I"}
-    ]
-      */
-   // console.log(characterData[2]);
-    
 
 
     
@@ -67,18 +68,62 @@ var GameState = {
     this.toneFour = this.add.button(280, 580, 'toneFourButton');
     
     this.toneOne.events.onInputDown.add(function(){
-      console.log("toneOne pressed")
+      console.log("toneOne pressed");
+        //currentCharIndex = currentCharIndex+1;
+        //this.displayCurrentWord();
+        this.validateTone(1);
+
     }, this);
     this.toneTwo.events.onInputDown.add(function(){
       console.log("toneTwo pressed")
+      this.validateTone(2);
+      
+      
     }, this);
     this.toneThree.events.onInputDown.add(function(){
       console.log("toneThree pressed")
+       this.validateTone(3);
     }, this);
     this.toneFour.events.onInputDown.add(function(){
       console.log("toneFour pressed")
+        this.validateTone(4);
     }, this);
  },
+    validateTone: function(toneNumber){
+        console.log("currentWord.character = "+currentWord.character+"\ncurrentWord.tone = "+currentWord.tone+"\ntoneNumber = "+toneNumber);
+        if(currentWord.tone==toneNumber){
+            alert("correct");
+            currentDisplayWord.destroy();
+            currentCharIndex = currentCharIndex+1;
+            this.displayCurrentWord();
+            
+        }
+        else{
+            alert("Incorrect please try again");
+            
+        }
+        
+        
+    },
+    displayCurrentWord: function(){
+        
+        currentWord = this.characterLibraryData.characterData[currentCharIndex];
+        console.log("the current word is = " + currentWord.character
+                   +', tone = '+ currentWord.tone
+                  +', pinyin = '+ currentWord.pinyin
+                  +', meaning = '+ currentWord.meaning);
+      
+       //new Text(this, 100, 100,currentWord.character);
+        
+        
+        
+        
+        currentDisplayWord = this.add.text(100,150,currentWord.character,charStyle);
+        //this.currentDisplayWord.anchor.set(.5);
+        
+   //     this.currentDisplayWord.anchor.setTo(2,2);
+    },
+    
   
 };
 
