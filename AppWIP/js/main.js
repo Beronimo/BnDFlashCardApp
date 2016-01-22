@@ -2,7 +2,11 @@
 var currentCharIndex = 0;
 var currentWord;
 var currentDisplayWord;
+var currentAnswerResult = "Correct";
 var charStyle = {font: "64px Arial", fill: "#fff"};
+var styleCorrect = {font: "44px Arial", fill: "green"};
+var styleIncorrect = {font: "44px Arial", fill: "red"};
+
 
 var GameState = {
   
@@ -69,59 +73,68 @@ var GameState = {
     
     this.toneOne.events.onInputDown.add(function(){
       console.log("toneOne pressed");
-        //currentCharIndex = currentCharIndex+1;
-        //this.displayCurrentWord();
-        this.validateTone(1);
-
+      this.validateTone(1);
     }, this);
-    this.toneTwo.events.onInputDown.add(function(){
+    
+     this.toneTwo.events.onInputDown.add(function(){
       console.log("toneTwo pressed")
       this.validateTone(2);
-      
-      
     }, this);
+     
     this.toneThree.events.onInputDown.add(function(){
       console.log("toneThree pressed")
        this.validateTone(3);
     }, this);
+     
     this.toneFour.events.onInputDown.add(function(){
       console.log("toneFour pressed")
         this.validateTone(4);
     }, this);
  },
+    
     validateTone: function(toneNumber){
         console.log("currentWord.character = "+currentWord.character+"\ncurrentWord.tone = "+currentWord.tone+"\ntoneNumber = "+toneNumber);
         if(currentWord.tone==toneNumber){
-            alert("correct");
+            //right answer
+            this.displayCharResult(true);
+            //currentAnswerResult.destroy();
             currentDisplayWord.destroy();
             currentCharIndex = currentCharIndex+1;
             this.displayCurrentWord();
             
         }
         else{
-            alert("Incorrect please try again");
-            
+            //wrong answer
+           // currentAnswerResult.destroy();
+            this.displayCharResult(false);
         }
-        
+           
+    },
+    
+    displayCharResult: function(passFail){
+
+        if (passFail){
+            this.currentAnswerResult = "Correct";
+            this.add.text(100,250, currentAnswerResult, styleCorrect);
+
+        }else{
+            currentAnswerResult = "Incorrect";
+            this.add.text(100,250,currentAnswerResult, styleIncorrect);
+
+        };
         
     },
+    
     displayCurrentWord: function(){
         
         currentWord = this.characterLibraryData.characterData[currentCharIndex];
         console.log("the current word is = " + currentWord.character
                    +', tone = '+ currentWord.tone
                   +', pinyin = '+ currentWord.pinyin
-                  +', meaning = '+ currentWord.meaning);
-      
-       //new Text(this, 100, 100,currentWord.character);
-        
-        
-        
-        
+                  +', meaning = '+ currentWord.meaning);      
+   
         currentDisplayWord = this.add.text(100,150,currentWord.character,charStyle);
-        //this.currentDisplayWord.anchor.set(.5);
-        
-   //     this.currentDisplayWord.anchor.setTo(2,2);
+
     },
     
   
