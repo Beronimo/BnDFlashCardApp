@@ -58,15 +58,23 @@ var GameState = {
         // console.log(this.game.cache.getText('chineseCharacters'));
 
         this.characterLibraryData = JSON.parse(this.game.cache.getText('chineseCharacters'));
-
+       var deckarray=[];
         this.characterLibraryData.characterData.forEach(function(element) {
-            console.log('character = ' + element.character + ', tone = ' + element.tone + ', pinyin = ' + element.pinyin + ', meaning = ' + element.meaning);
+          console.log('character = ' + element.character + ', tone = ' + element.tone + ', pinyin = ' + element.pinyin + ', meaning = ' + element.meaning);
+         
+         deckarray.push([element.character,0]);
+         // blah.push([element.character,0]);
+         // this.storeWordLocally(blah);
+          
+          
+          
         }, this);
+      this.storeWordLocally(blah);
         currentWord = this.characterLibraryData.characterData[currentCharIndex];
         console.log("the current word is = " + currentWord.character + ', tone = ' + currentWord.tone + ', pinyin = ' + currentWord.pinyin + ', meaning = ' + currentWord.meaning);
         currentAnswerResult = this.add.text(-100, -250, "", styleCorrect);
         currentDisplayWord = this.add.text(-100, -250, "", styleCorrect);
-        console.log("localstoragela = "+localStorage.getObj('highscore')[0][1]);
+        console.log("localstoragela = "+localStorage.getObj('Deck1'));
         this.displayCurrentWord();
     },
     //this is executed multiple times per second
@@ -196,13 +204,13 @@ var GameState = {
         currentDisplayWord = this.add.text(100, 150, currentWord.character, charStyle);
         console.log("currentCharIndex is " + currentCharIndex + " of " + this.characterLibraryData.characterData.length);
         this.createOnscreenControls();
-        this.storeWordLocally();
+        
 
     },
-    storeWordLocally: function() {
-        var blah=[["wo",12],["nan",55]];
+    storeWordLocally: function(wordDeck) {
+        //var blah
         //localStorage.setItem('highscore',blah);
-        localStorage.setObj('highscore', blah);
+        localStorage.setObj('Deck1', wordDeck);
         
     },
 
