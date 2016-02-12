@@ -16,6 +16,14 @@ var styleIncorrect = {
     fill: "red"
 };
 
+/*
+Storage.prototype.setObj = function(key, obj) {
+    return this.setItem(key, JSON.stringify(obj))
+}
+Storage.prototype.getObj = function(key) {
+    return JSON.parse(this.getItem(key))
+}
+*/
 
 var GameState = {
 
@@ -57,7 +65,7 @@ var GameState = {
         console.log("the current word is = " + currentWord.character + ', tone = ' + currentWord.tone + ', pinyin = ' + currentWord.pinyin + ', meaning = ' + currentWord.meaning);
         currentAnswerResult = this.add.text(-100, -250, "", styleCorrect);
         currentDisplayWord = this.add.text(-100, -250, "", styleCorrect);
-
+        console.log("localstoragela = "+localStorage.getItem('highscore')[0]);
         this.displayCurrentWord();
     },
     //this is executed multiple times per second
@@ -187,7 +195,14 @@ var GameState = {
         currentDisplayWord = this.add.text(100, 150, currentWord.character, charStyle);
         console.log("currentCharIndex is " + currentCharIndex + " of " + this.characterLibraryData.characterData.length);
         this.createOnscreenControls();
+        this.storeWordLocally();
 
+    },
+    storeWordLocally: function() {
+        var blah=[{"wo":12}];
+        localStorage.setItem('highscore',blah);
+    
+        
     },
 
 
