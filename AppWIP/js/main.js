@@ -16,14 +16,15 @@ var styleIncorrect = {
     fill: "red"
 };
 
-/*
+//functions to use when writing data to local storage to convert to strings
+//Use localStorage.setObj(key, value) to save an array or object and localStorage.getObj(key) to retrieve it.
 Storage.prototype.setObj = function(key, obj) {
     return this.setItem(key, JSON.stringify(obj))
 }
 Storage.prototype.getObj = function(key) {
     return JSON.parse(this.getItem(key))
 }
-*/
+
 
 var GameState = {
 
@@ -65,7 +66,7 @@ var GameState = {
         console.log("the current word is = " + currentWord.character + ', tone = ' + currentWord.tone + ', pinyin = ' + currentWord.pinyin + ', meaning = ' + currentWord.meaning);
         currentAnswerResult = this.add.text(-100, -250, "", styleCorrect);
         currentDisplayWord = this.add.text(-100, -250, "", styleCorrect);
-        console.log("localstoragela = "+localStorage.getItem('highscore')[0]);
+        console.log("localstoragela = "+localStorage.getObj('highscore')[0][1]);
         this.displayCurrentWord();
     },
     //this is executed multiple times per second
@@ -199,9 +200,9 @@ var GameState = {
 
     },
     storeWordLocally: function() {
-        var blah=[{"wo":12}];
-        localStorage.setItem('highscore',blah);
-    
+        var blah=[["wo",12],["nan",55]];
+        //localStorage.setItem('highscore',blah);
+        localStorage.setObj('highscore', blah);
         
     },
 
