@@ -69,7 +69,7 @@ var GameState = {
           
           
         }, this);
-      this.storeWordLocally(blah);
+      this.storeWordLocally(deckarray);
         currentWord = this.characterLibraryData.characterData[currentCharIndex];
         console.log("the current word is = " + currentWord.character + ', tone = ' + currentWord.tone + ', pinyin = ' + currentWord.pinyin + ', meaning = ' + currentWord.meaning);
         currentAnswerResult = this.add.text(-100, -250, "", styleCorrect);
