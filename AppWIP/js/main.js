@@ -3,6 +3,8 @@ var currentCharIndex = 0;
 var currentWord;
 var currentDisplayWord;
 var currentAnswerResult;
+var currentDisplayPinYin;
+var currentDisplayDef;
 var charStyle = {
     font: "64px Arial",
     fill: "#fff"
@@ -45,6 +47,10 @@ var GameState = {
         this.load.image('toneTwoButton', 'assets/images/btnTone2.png');
         this.load.image('toneThreeButton', 'assets/images/btnTone3.png');
         this.load.image('toneFourButton', 'assets/images/btnTone4.png');
+        this.load.image('easyButton', 'assets/images/btn_easy.png');
+        this.load.image('medButton', 'assets/images/btn_med.png');
+        this.load.image('hardButton', 'assets/images/btn_hard.png');
+
 
         this.load.text('chineseCharacters', 'assets/data/character.json');
 
@@ -54,27 +60,27 @@ var GameState = {
 
         this.background = this.game.add.sprite(0, 0, 'background');
 
-     //   this.createOnscreenControls();
+        //   this.createOnscreenControls();
         // console.log(this.game.cache.getText('chineseCharacters'));
 
         this.characterLibraryData = JSON.parse(this.game.cache.getText('chineseCharacters'));
-       var deckarray=[];
+        var deckarray = [];
         this.characterLibraryData.characterData.forEach(function(element) {
-          console.log('character = ' + element.character + ', tone = ' + element.tone + ', pinyin = ' + element.pinyin + ', meaning = ' + element.meaning);
-         
-         deckarray.push([element.character,0]);
-         // blah.push([element.character,0]);
-         // this.storeWordLocally(blah);
-          
-          
-          
+            console.log('character = ' + element.character + ', tone = ' + element.tone + ', pinyin = ' + element.pinyin + ', meaning = ' + element.meaning);
+
+            deckarray.push([element.character, 0]);
+            // blah.push([element.character,0]);
+            // this.storeWordLocally(blah);
+
+
+
         }, this);
-      this.storeWordLocally(deckarray);
+        this.storeWordLocally(deckarray);
         currentWord = this.characterLibraryData.characterData[currentCharIndex];
         console.log("the current word is = " + currentWord.character + ', tone = ' + currentWord.tone + ', pinyin = ' + currentWord.pinyin + ', meaning = ' + currentWord.meaning);
         currentAnswerResult = this.add.text(-100, -250, "", styleCorrect);
         currentDisplayWord = this.add.text(-100, -250, "", styleCorrect);
-        console.log("localstoragela = "+localStorage.getObj('Deck1'));
+        console.log("localstoragela = " + localStorage.getObj('Deck1'));
         this.displayCurrentWord();
     },
     //this is executed multiple times per second
@@ -112,24 +118,19 @@ var GameState = {
         if (currentWord.tone == toneNumber) {
             //right answer
             this.displayCharResult(true);
-            
-            if (currentCharIndex + 1 == this.characterLibraryData.characterData.length) {
-                currentCharIndex = 0;
-                alert("back to the start of the deck");
-            } else {
-                currentCharIndex++;
-
-            };
-            
             //do something about it being correct
-
             this.displayRatingOptions();
+            this.showPinYin();
+            this.showDefinition();
 
 
         } else {
             //wrong answer
             // currentAnswerResult.destroy();
             this.displayCharResult(false);
+            this.displayRatingOptions();
+            this.showPinYin();
+            this.showDefinition();
 
         }
 
@@ -139,8 +140,27 @@ var GameState = {
         this.btnMedium.destroy();
         this.btnHard.destroy();
         currentAnswerResult.destroy();
-        
+
     },
+    destroyMeaningAndPinyin: function(){
+        if (currentDisplayDef === undefined || currentDisplayDef === null) {
+            //do something
+            console.log('currentDisplayDef doesn\'t exist');
+        }
+        else{
+            console.log('currentDisplayDef exist');
+            currentDisplayDef.destroy();
+        }
+        if (currentDisplayPinYin === undefined || currentDisplayPinYin === null) {
+            //do something
+            console.log('currentDisplayPinYin doesn\'t exist');
+        }
+        else{
+            console.log('currentDisplayPinYin exist');
+            currentDisplayPinYin.destroy();
+        }   
+    },
+    
     //destroy 1,2,3,4 buttons and replace with difficulty rating
     displayRatingOptions: function() {
         this.toneOne.destroy();
@@ -148,46 +168,57 @@ var GameState = {
         this.toneThree.destroy();
         this.toneFour.destroy();
         //alert('destroyed');
-        
-        this.btnEasy = this.add.button(10, 580, 'toneOneButton');
-        this.btnMedium = this.add.button(100, 580, 'toneTwoButton');
-        this.btnHard = this.add.button(190, 580, 'toneThreeButton');
-        
-        
+
+        this.btnEasy = this.add.button(10, 580, 'easyButton');
+        this.btnMedium = this.add.button(100, 580, 'medButton');
+        this.btnHard = this.add.button(190, 580, 'hardButton');
+
+
         this.btnEasy.events.onInputDown.add(function() {
             console.log("easy pressed");
             this.destroyRatingOptions();
-             this.displayCurrentWord();
-            
+            this.destroyMeaningAndPinyin();
+            this.displayCurrentWord();
+
         }, this);
 
         this.btnMedium.events.onInputDown.add(function() {
             console.log("medium pressed");
             this.destroyRatingOptions();
-             this.displayCurrentWord();
+            this.destroyMeaningAndPinyin();
+            this.displayCurrentWord();
         }, this);
 
         this.btnHard.events.onInputDown.add(function() {
             console.log("hard pressed");
             this.destroyRatingOptions();
-             this.displayCurrentWord();
+            this.destroyMeaningAndPinyin();
+            this.displayCurrentWord();
         }, this);
-       
 
-        
-        
+
+
+
     },
 
     displayCharResult: function(passFail) {
 
+        if (currentCharIndex + 1 == this.characterLibraryData.characterData.length) {
+            currentCharIndex = 0;
+            alert("back to the start of the deck");
+        } else {
+            currentCharIndex++;
+
+        };
+
         if (passFail) {
             currentAnswerResult.destroy();
-            currentAnswerResult = this.add.text(100,250, "Correct", styleCorrect);
+            currentAnswerResult = this.add.text(100, 400, "Correct", styleCorrect);
             //alert('correct :) next word');
 
         } else {
             currentAnswerResult.destroy();
-            currentAnswerResult = this.add.text(100, 250, "Incorrect", styleIncorrect);
+            currentAnswerResult = this.add.text(100, 400, "Incorrect", styleIncorrect);
 
         };
 
@@ -204,16 +235,23 @@ var GameState = {
         currentDisplayWord = this.add.text(100, 150, currentWord.character, charStyle);
         console.log("currentCharIndex is " + currentCharIndex + " of " + this.characterLibraryData.characterData.length);
         this.createOnscreenControls();
-        
+
 
     },
     storeWordLocally: function(wordDeck) {
         //var blah
         //localStorage.setItem('highscore',blah);
         localStorage.setObj('Deck1', wordDeck);
-        
-    },
 
+    },
+    showPinYin: function() {
+        currentDisplayPinYin = this.add.text(100, 200, currentWord.pinyin, charStyle);
+       
+    },
+    showDefinition: function() {
+        currentDisplayDef = this.add.text(100, 250, currentWord.meaning, charStyle);
+       
+    },
 
 };
 
